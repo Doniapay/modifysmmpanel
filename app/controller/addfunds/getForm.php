@@ -1,4 +1,4 @@
-<?php 
+<?php
 if (!defined('ADDFUNDS')) {
     http_response_code(404);
     die();
@@ -11,133 +11,139 @@ $amountField = '<div class="form-group">
 $feeField = '<div id="fee_fields"></div>';
 $paymentBtn = '<button type="submit" class="btn btn-block btn-primary">[text]</button>';
 
-if($selectedMethod == 1){
+if ($selectedMethod == 1) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Initiate Payment");
 }
 
-if($selectedMethod == 2){
+if ($selectedMethod == 2) {
     $formData .= '<div class="form-group">
     <label class="control-label">Order ID</label>
     <input type="text" class="form-control" name="payTMOrderId"  required />
     </div>';
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Verify Transaction");
+    $formData .= replaceText($paymentBtn, "Verify Transaction");
 }
 
-if($selectedMethod == 3){
+if ($selectedMethod == 3) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Initiate Payment");
 }
 
-if($selectedMethod == 4){
+if ($selectedMethod == 4) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Initiate Payment");
 }
 
-if($selectedMethod == 5){
+if ($selectedMethod == 5) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Initiate Payment");
 }
 
-if($selectedMethod == 6){
+if ($selectedMethod == 6) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Initiate Payment");
 }
 
-if($selectedMethod == 7){
+if ($selectedMethod == 7) {
     $formData .= '<div class="form-group">
     <label class="control-label">Transaction ID</label>
     <input type="text" class="form-control" name="PhonePeTransactionId"  required />
     </div>';
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Verify Transaction");
+    $formData .= replaceText($paymentBtn, "Verify Transaction");
 }
 
-if($selectedMethod == 8){
+if ($selectedMethod == 8) {
     $formData .= '<div class="form-group">
     <label class="control-label">Transaction ID</label>
     <input type="text" class="form-control" name="EasypaisaTransactionId"  required />
     </div>';
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Verify Transaction");
+    $formData .= replaceText($paymentBtn, "Verify Transaction");
 }
 
-if($selectedMethod == 9){
+if ($selectedMethod == 9) {
     $formData .= '<div class="form-group">
     <label class="control-label">Transaction ID</label>
     <input type="text" class="form-control" name="JazzcashTransactionId"  required />
     </div>';
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Verify Transaction");
+    $formData .= replaceText($paymentBtn, "Verify Transaction");
 }
 
-if($selectedMethod == 10){
+if ($selectedMethod == 10) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Initiate Payment");
 }
 
 
-if($selectedMethod == 11){
+if ($selectedMethod == 11) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Initiate Payment");
 }
 
-if($selectedMethod == 12){
+if ($selectedMethod == 12) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Initiate Payment");
 }
 
-if($selectedMethod == 13){
+if ($selectedMethod == 13) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Initiate Payment");
 }
 
-if($selectedMethod == 14){
+if ($selectedMethod == 14) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Initiate Payment");
 }
 
-if($selectedMethod == 15){
+if ($selectedMethod == 15) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Initiate Payment");
 }
 
-if($selectedMethod == 16){
+if ($selectedMethod == 16) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Initiate Payment");
 }
 
-if($selectedMethod == 17){
+if ($selectedMethod == 17) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Initiate Payment");
 }
 
-if($selectedMethod == 18){
+if ($selectedMethod == 18) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Initiate Payment");
 }
 
-if($selectedMethod == 88){
+if ($selectedMethod == 20) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn,"Initiate Payment");
+    $formData .= replaceText($paymentBtn, "Start Payment");
+}
+
+if ($selectedMethod == 69) {
+    $formData .= $amountField;
+    $formData .= $feeField;
+    $formData .= replaceText($paymentBtn, "Make Payment");
 }
