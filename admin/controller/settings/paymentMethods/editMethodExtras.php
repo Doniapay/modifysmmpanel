@@ -53,7 +53,7 @@ if ($methodId == 6) {
 }
 
 if ($methodId == 7) {
-    $email = filter_var($_POST["email"],FILTER_VALIDATE_EMAIL);
+    $email = filter_var($_POST["email"], FILTER_VALIDATE_EMAIL);
     $password = htmlspecialchars($_POST["password"]);
     $methodExtras = [
         "email" => $email,
@@ -62,7 +62,7 @@ if ($methodId == 7) {
 }
 
 if ($methodId == 8) {
-    $email = filter_var($_POST["email"],FILTER_VALIDATE_EMAIL);
+    $email = filter_var($_POST["email"], FILTER_VALIDATE_EMAIL);
     $password = htmlspecialchars($_POST["password"]);
     $senderEmail = htmlspecialchars($_POST["senderEmail"]);
     $emailSubject = htmlspecialchars($_POST["emailSubject"]);
@@ -75,7 +75,7 @@ if ($methodId == 8) {
 }
 
 if ($methodId == 9) {
-    $email = filter_var($_POST["email"],FILTER_VALIDATE_EMAIL);
+    $email = filter_var($_POST["email"], FILTER_VALIDATE_EMAIL);
     $password = htmlspecialchars($_POST["password"]);
     $senderEmail = htmlspecialchars($_POST["senderEmail"]);
     $emailSubject = htmlspecialchars($_POST["emailSubject"]);
@@ -166,16 +166,21 @@ if ($methodId == 18) {
     ];
 }
 
-if ($methodId == 88) {
+if ($methodId == 20) {
     $apiKey = htmlspecialchars($_POST["api_key"]);
-    $secret_key = htmlspecialchars($_POST["secret_key"]);
-    $domain = htmlspecialchars($_POST["domain"]);
+    $apiUrl = htmlspecialchars($_POST["api_url"]);
     $exchangeRate = htmlspecialchars($_POST["exchange_rate"]);
-
     $methodExtras = [
         "api_key" => $apiKey,
-        "secret_key" => $secret_key,
-        "domain" => $domain,
+        "api_url" => $apiUrl,
+        "exchange_rate" => $exchangeRate
+    ];
+}
+if ($methodId == 69) {
+    $apiKey = htmlspecialchars($_POST["api_key"]);
+    $exchangeRate = htmlspecialchars($_POST["exchange_rate"]);
+    $methodExtras = [
+        "api_key" => $apiKey,
         "exchange_rate" => $exchangeRate
     ];
 }
