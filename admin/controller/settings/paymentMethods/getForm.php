@@ -184,18 +184,20 @@ if ($method["methodId"] == 18) {
     <input type="text"  name="secretKey" class="form-control" value="' . $methodExtras["secretKey"] . '"/></div>';
 }
 
-if ($method["methodId"] == 88) {
+if ($method["methodId"] == 20) {
     $form .= '<div class="form-group mb-3"><label class="form-label">API Key</label>
-    <input type="text" name="api_key" class="form-control" value="' . htmlspecialchars($methodExtras["api_key"]) . '"/></div>';
-
-    $form .= '<div class="form-group mb-3"><label class="form-label">Unique Key</label>
-    <input type="text" name="secret_key" class="form-control" value="' . htmlspecialchars($methodExtras["secret_key"]) . '"/></div>';
-
-    $form .= '<div class="form-group mb-3"><label class="form-label">Domain</label>
-    <input type="text" name="domain" class="form-control" value="' . htmlspecialchars($methodExtras["domain"]) . '"/></div>';
-
+    <input type="text"  name="api_key" class="form-control" value="' . $methodExtras["api_key"] . '"/></div>';
+    $form .= '<div class="form-group mb-3"><label class="form-label">API URL</label>
+    <input type="text"  name="api_url" class="form-control" value="' . $methodExtras["api_url"] . '"/></div>';
     $form .= '<div class="form-group mb-3"><label class="form-label">Exchange Rate [1 USD = ? BDT]</label>
-    <input type="text" name="exchange_rate" class="form-control" value="' . htmlspecialchars($methodExtras["exchange_rate"]) . '"/></div>';
+    <input type="text"  name="exchange_rate" class="form-control" value="' . $methodExtras["exchange_rate"] . '"/></div>';
+}
+
+if ($method["methodId"] == 69) {
+    $form .= '<div class="form-group mb-3"><label class="form-label">API Key</label>
+    <input type="text"  name="api_key" class="form-control" value="' . $methodExtras["api_key"] . '"/></div>';
+    $form .= '<div class="form-group mb-3"><label class="form-label">Exchange Rate [1 USD = ? BDT]</label>
+    <input type="text"  name="exchange_rate" class="form-control" value="' . $methodExtras["exchange_rate"] . '"/></div>';
 }
 
 $form .= '<div class="custom-modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>&nbsp;&nbsp;<button type="submit" data-loading-text="Updating..." class="btn btn-primary">Edit</button></div></form>';
