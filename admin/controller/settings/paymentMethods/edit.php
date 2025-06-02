@@ -19,7 +19,8 @@ $automaticMethods = [
     16,
     17,
     18,
-    88
+    20,
+    69
 ];
 
 $allMethods = array_merge($automaticMethods, $manualMethods);
@@ -33,7 +34,7 @@ $methodBonusPercentage = floatval($_POST["method_bonus"]);
 $methodBonusStartAmount = intval($_POST["method_bonus_start_amount"]);
 $methodStatus = in_array($_POST["method_status"], [0, 1]) ? $_POST["method_status"] : 1;
 $methodInstructions = htmlspecialchars($_POST["method_instructions"]);
-$methodInstructions = str_replace("&lt;p&gt;&lt;br&gt;&lt;/p&gt;","",$methodInstructions);
+$methodInstructions = str_replace("&lt;p&gt;&lt;br&gt;&lt;/p&gt;", "", $methodInstructions);
 
 if (!in_array($methodId, $allMethods)) {
     errorExit("Invalid payment method");
@@ -68,7 +69,6 @@ if (in_array($methodId, $automaticMethods)) {
     ];
 
     require_once("editMethodExtras.php");
-
 } else {
     $update = $conn->prepare("UPDATE paymentmethods SET 
                           methodVisibleName=:name,
