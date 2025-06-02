@@ -161,8 +161,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($method["methodId"] == 18) {
             require("addfunds/Initiators/payeer.php");
         }
-        if ($method["methodId"] == 88) {
-            require("addfunds/Initiators/doniapay.php");
+        if ($method["methodId"] == 20) {
+            require("addfunds/Initiators/tuktakpay.php");
+        }
+        if ($method["methodId"] == 69) {
+            require("addfunds/Initiators/tuktakpay.php");
         }
         header("Content-Type: application/json; charset=utf-8");
         echo json_encode($response, true);
