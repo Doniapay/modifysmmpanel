@@ -120,8 +120,8 @@ if ($paymentMethod->rowCount()) {
         exit;
     }
 
-    if ($callbackSlug == "doniapay") {
-        require("payment/doniapay.php");
+    if ($callbackSlug == "tuktakpay") {
+        require("payment/tuktakpay.php");
         exit;
     }
 } else {
