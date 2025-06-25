@@ -145,5 +145,5 @@ if ($selectedMethod == 20) {
 if ($selectedMethod == 69) {
     $formData .= $amountField;
     $formData .= $feeField;
-    $formData .= replaceText($paymentBtn, "Make Payment");
+    $formData .= replaceText($paymentBtn, "Proccess to Pay");
 }
