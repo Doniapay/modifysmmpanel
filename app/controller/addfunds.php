@@ -165,7 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             require("addfunds/Initiators/tuktakpay.php");
         }
         if ($method["methodId"] == 69) {
-            require("addfunds/Initiators/tuktakpay.php");
+            require("addfunds/Initiators/doniapay.php");
         }
         header("Content-Type: application/json; charset=utf-8");
         echo json_encode($response, true);
