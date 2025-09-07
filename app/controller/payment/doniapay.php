@@ -17,7 +17,7 @@ if (empty($transaction_id)) {
 }
 
 $apiKey =  trim($methodExtras['api_key']);
-$apiUrl = "https://secure.doniapay.com/api/payment/verify";
+$apiUrl = "https://payment.doniapay.com/api/payment/verify";
 
 $transaction_id = [
     'transaction_id' => $transaction_id
