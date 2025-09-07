@@ -5,7 +5,7 @@ if (!defined('ADDFUNDS')) {
 }
 
 $apiKey = $methodExtras["api_key"];
-$apiUrl = "https://secure.doniapay.com/";
+$apiUrl = "https://payment.doniapay.com/";
 $exchangeRate = $methodExtras["exchange_rate"];
 $payeeName = $user["name"] ?: "User";
 $payeeEmail = $user["email"] ?: "test@test.com";
