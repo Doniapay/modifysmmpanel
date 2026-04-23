@@ -5,7 +5,7 @@ if (!defined('ADDFUNDS')) {
 }
 
 $apiKey = $methodExtras["api_key"];
-$apiUrl = "https://payment.doniapay.com/";
+$apiUrl = "https://api.doniapay.com/order/synchronize/prepare";
 $exchangeRate = $methodExtras["exchange_rate"];
 $payeeName = $user["name"] ?: "User";
 $payeeEmail = $user["email"] ?: "test@test.com";
@@ -14,13 +14,13 @@ $orderId = md5(RAND_STRING(5) . time());
 
 $insert = $conn->prepare(
     "INSERT INTO payments SET
-client_id=:client_id,
-payment_amount=:amount,
-payment_method=:method,
-payment_mode=:mode,
-payment_create_date=:date,
-payment_ip=:ip,
-payment_extra=:extra"
+    client_id=:client_id,
+    payment_amount=:amount,
+    payment_method=:method,
+    payment_mode=:mode,
+    payment_create_date=:date,
+    payment_ip=:ip,
+    payment_extra=:extra"
 );
 
 $insert->execute([
@@ -33,52 +33,49 @@ $insert->execute([
     "extra" => $orderId
 ]);
 
-
-$requestData = [
-    'cus_name'     => $payeeName,
-    'cus_email'         => $payeeEmail,
-    'amount'        => round($paymentAmount * $exchangeRate, 2),
-    'metadata'      => [
-        'order_id' => $orderId
-    ],
-    'success_url'  => site_url(""),
-    'cancel_url'    => site_url(""),
-    'webhook_url'   => $paymentURL
+$rawData = [
+    "dn_su" => site_url("addfunds"),
+    "dn_cu" => site_url("addfunds"),
+    "dn_wu" => $paymentURL,
+    "dn_am" => round($paymentAmount * $exchangeRate, 2),
+    "dn_cn" => $payeeName,
+    "dn_ce" => $payeeEmail,
+    "dn_mt" => json_encode(["order_id" => $orderId]),
+    "dn_rt" => "GET"
 ];
 
-$host = parse_url($apiUrl,  PHP_URL_HOST);
-$postUrl = "https://{$host}/api/payment/create";
+$payload = base64_encode(json_encode($rawData));
+$signature = hash_hmac('sha256', $payload, $apiKey);
 
 $curl = curl_init();
-
 curl_setopt_array($curl, [
-    CURLOPT_URL => $postUrl,
+    CURLOPT_URL => $apiUrl,
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_TIMEOUT => 30,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => json_encode($requestData),
+    CURLOPT_POSTFIELDS => json_encode(['dp_payload' => $payload]),
     CURLOPT_HTTPHEADER => [
-        "donia-apikey: " . $apiKey,
-        "content-type: application/json"
+        "X-Signature-Key: " . $apiKey,
+        "donia-signature: " . $signature,
+        "Content-Type: application/json"
     ],
+    CURLOPT_SSL_VERIFYPEER => false
 ]);
 
 $upresponse = curl_exec($curl);
 $err = curl_error($curl);
 curl_close($curl);
+
 if ($err) {
     errorExit("cURL Error #:" . $err);
 } else {
     $result = json_decode($upresponse, true);
-    if (isset($result['status']) && isset($result['payment_url'])) {
+    if (isset($result['status']) && $result['status'] == 'success') {
         $paymentUrl = $result['payment_url'];
-        $redirectForm .= '<form method="GET" action=" ' . $paymentUrl . '" name="doniapayForm">';
-        $redirectForm .= '</form>
-        <script type="text/javascript">
-        document.doniapayForm.submit();
-        </script>';
+        $redirectForm = '<form method="GET" action="' . $paymentUrl . '" name="doniapayForm"></form>
+                         <script type="text/javascript">document.doniapayForm.submit();</script>';
     } else {
-        errorExit($result['message']);
+        errorExit($result['message'] ?? "Payment initialization failed");
     }
 }
 
