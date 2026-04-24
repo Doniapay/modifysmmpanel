@@ -4,11 +4,6 @@ if (!defined('PAYMENT')) {
     die();
 }
 
-/**
- * Doniapay - Payment Verification (Callback/Webhook)
- */
-
-// Doniapay typically sends 'ids' in the URL on return
 $transaction_id = $_REQUEST['ids'] ?? $_REQUEST['transactionId'] ?? '';
 
 if (empty($transaction_id)) {
@@ -59,11 +54,8 @@ if (empty($response)) {
 
 $data = json_decode($response, true);
 
-// New API returns 'status' => 'Paid' on success
-if (isset($data['status']) && $data['status'] == 'Paid') {
+if (isset($data['status']) && in_array($data['status'], ['Paid', 'COMPLETED', 1, 'success'])) {
     
-    // Extract metadata where order_id was stored
-    // The new API returns the custom data in 'dn_mt'
     $meta = json_decode($data['dn_mt'] ?? $data['metadata'] ?? '{}', true);
     $orderId = $meta['order_id'] ?? '';
 
@@ -81,7 +73,6 @@ if (isset($data['status']) && $data['status'] == 'Paid') {
         $row->execute(array("id" => $paymentDetails["client_id"]));
         $user = $row->fetch(PDO::FETCH_ASSOC);
 
-        // Session handling
         $_SESSION["msmbilisim_userlogin"] = 1;
         $_SESSION["msmbilisim_userid"]    = $user["client_id"];
         $_SESSION["msmbilisim_userpass"]  = $user["password"];
