@@ -36,8 +36,8 @@ $insert->execute([
 $rawData = [
     "dn_su" => site_url("addfunds"),
     "dn_cu" => site_url("addfunds"),
-    "dn_wu" => $paymentURL,
-    "dn_am" => round($paymentAmount * $exchangeRate, 2),
+    "dn_wu" => $paymentURL, 
+    "dn_am" => (string)round($paymentAmount * $exchangeRate, 2),
     "dn_cn" => $payeeName,
     "dn_ce" => $payeeEmail,
     "dn_mt" => json_encode(["order_id" => $orderId]),
@@ -59,7 +59,7 @@ curl_setopt_array($curl, [
         "donia-signature: " . $signature,
         "Content-Type: application/json"
     ],
-    CURLOPT_SSL_VERIFYPEER => false
+    CURLOPT_SSL_VERIFYPEER => false 
 ]);
 
 $upresponse = curl_exec($curl);
@@ -70,15 +70,18 @@ if ($err) {
     errorExit("cURL Error #:" . $err);
 } else {
     $result = json_decode($upresponse, true);
-    if (isset($result['status']) && $result['status'] == 'success') {
+    
+    if (isset($result['status']) && ($result['status'] == 'success' || $result['status'] == 1) && !empty($result['payment_url'])) {
         $paymentUrl = $result['payment_url'];
         $redirectForm = '<form method="GET" action="' . $paymentUrl . '" name="doniapayForm"></form>
                          <script type="text/javascript">document.doniapayForm.submit();</script>';
     } else {
-        errorExit($result['message'] ?? "Payment initialization failed");
+        $error_msg = $result['message'] ?? "Payment initialization failed";
+        errorExit("Gateway Error: " . $error_msg);
     }
 }
 
 $response["success"] = true;
 $response["message"] = "Your payment has been initiated and you will now be redirected to the payment gateway.";
 $response["content"] = $redirectForm;
+?>
