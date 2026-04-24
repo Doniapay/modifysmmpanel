@@ -22,7 +22,7 @@ if (empty($transaction_id)) {
 }
 
 $apiKey = trim($methodExtras['api_key']);
-$apiUrl = "https://api.doniapay.com/order/synchronize/confirm";
+$apiUrl = "https://api.doniapay.com/v2/order/synchronize/confirm";
 
 $postData = [
     'transaction_id' => $transaction_id
